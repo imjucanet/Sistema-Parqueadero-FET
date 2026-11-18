@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.fet.parqueadero.domain.service.GestionMovimientosServiceTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-18T13:42:14.083Z" hostname="LOQ-15AHP10" time="0.29">
+  <properties/>
+  <testcase name="registrarSalida_conMovimientoActivo_finalizaYPublicaEvento()" classname="com.fet.parqueadero.domain.service.GestionMovimientosServiceTest" time="0.236"/>
+  <testcase name="registrarEntrada_conVehiculoYEspacioValidos_guardaMovimientoYPublicaEvento()" classname="com.fet.parqueadero.domain.service.GestionMovimientosServiceTest" time="0.007"/>
+  <testcase name="listarMovimientosActivos_delegaAlRepositorio()" classname="com.fet.parqueadero.domain.service.GestionMovimientosServiceTest" time="0.003"/>
+  <testcase name="registrarEntrada_conEspacioIdValido_usaEseEspacioEnVezDeAutoAsignar()" classname="com.fet.parqueadero.domain.service.GestionMovimientosServiceTest" time="0.004"/>
+  <testcase name="registrarEntrada_conVehiculoInexistente_lanzaEntidadInvalidaException()" classname="com.fet.parqueadero.domain.service.GestionMovimientosServiceTest" time="0.005"/>
+  <testcase name="registrarEntrada_conEspacioIdInexistente_lanzaEntidadInvalidaException()" classname="com.fet.parqueadero.domain.service.GestionMovimientosServiceTest" time="0.005"/>
+  <testcase name="registrarEntrada_conVehiculoYaEnParqueadero_lanzaVehiculoYaEnParqueaderoException()" classname="com.fet.parqueadero.domain.service.GestionMovimientosServiceTest" time="0.004"/>
+  <testcase name="registrarSalida_conMovimientoNoActivo_lanzaMovimientoNoActivoException()" classname="com.fet.parqueadero.domain.service.GestionMovimientosServiceTest" time="0.003"/>
+  <testcase name="listarHistorialMovimientos_delegaAlRepositorio()" classname="com.fet.parqueadero.domain.service.GestionMovimientosServiceTest" time="0.002"/>
+  <testcase name="registrarEntrada_conEspacioIdNoDisponible_lanzaEspacioNoDisponibleException()" classname="com.fet.parqueadero.domain.service.GestionMovimientosServiceTest" time="0.005"/>
+  <testcase name="registrarEntrada_sinEspaciosDisponibles_lanzaEspacioNoDisponibleException()" classname="com.fet.parqueadero.domain.service.GestionMovimientosServiceTest" time="0.004"/>
+  <testcase name="registrarSalida_conMovimientoInexistente_lanzaRecursoNoEncontrado()" classname="com.fet.parqueadero.domain.service.GestionMovimientosServiceTest" time="0.003"/>
+  <system-out><![CDATA[2026-11-18T08:42:14.299-05:00  INFO 4808 --- [backend] [kend-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=backend-producer-1] Node -1 disconnected.
+2026-11-18T08:42:14.300-05:00  WARN 4808 --- [backend] [kend-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=backend-producer-1] Connection to node -1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2026-11-18T08:42:14.300-05:00  WARN 4808 --- [backend] [kend-producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=backend-producer-1] Bootstrap broker localhost:9092 (id: -1 rack: null) disconnected
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

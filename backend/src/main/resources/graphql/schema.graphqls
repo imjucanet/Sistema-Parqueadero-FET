@@ -1,0 +1,154 @@
+"Instante ISO-8601 con zona horaria (OffsetDateTime), p. ej. 2026-10-28T19:30:00-05:00."
+scalar DateTime
+
+type Query {
+    propietario(id: ID!): Propietario
+    "Si se omiten pagina/tamano devuelve todos los registros."
+    propietarios(pagina: Int, tamano: Int): [Propietario!]!
+
+    vehiculo(id: ID!): Vehiculo
+    vehiculos(pagina: Int, tamano: Int): [Vehiculo!]!
+    "Catálogo estático de marcas y modelos agrupado por tipo de vehículo."
+    marcas: [MarcasPorTipo!]!
+
+    espacio(id: ID!): Espacio
+    espacios(pagina: Int, tamano: Int): [Espacio!]!
+    espaciosDisponibles(pagina: Int, tamano: Int): [Espacio!]!
+
+    movimiento(id: ID!): Movimiento
+    movimientosActivos(pagina: Int, tamano: Int): [Movimiento!]!
+    historialMovimientos(pagina: Int, tamano: Int): [Movimiento!]!
+}
+
+type Mutation {
+    registrarPropietario(input: PropietarioInput!): Propietario!
+    actualizarPropietario(id: ID!, input: PropietarioInput!): Propietario!
+
+    registrarVehiculo(input: VehiculoInput!): Vehiculo!
+    actualizarVehiculo(id: ID!, input: VehiculoInput!): Vehiculo!
+    "Registra varios vehículos; cada elemento informa su propio éxito o error."
+    registrarVehiculosEnLote(inputs: [VehiculoInput!]!): [ResultadoLoteVehiculo!]!
+
+    registrarEspacio(input: EspacioInput!): Espacio!
+
+    registrarEntrada(vehiculoId: ID!, espacioId: ID): Movimiento!
+    registrarSalida(movimientoId: ID!): Movimiento!
+}
+
+type Subscription {
+    "Emite cada movimiento (entrada o salida) justo después de confirmarse en la base de datos."
+    movimientoRegistrado: Movimiento!
+}
+
+type Propietario {
+    id: ID!
+    primerNombre: String!
+    primerApellido: String!
+    nombreCompleto: String!
+    numeroDocumento: String!
+    tipoUsuario: TipoUsuario!
+    telefono: String
+    correo: String
+    vehiculos: [Vehiculo!]!
+}
+
+type Vehiculo {
+    id: ID!
+    placa: String!
+    tipo: TipoVehiculo!
+    marca: String!
+    modelo: String
+    estado: EstadoVehiculo!
+    propietario: Propietario!
+}
+
+type Espacio {
+    id: ID!
+    numero: String!
+    estado: EstadoEspacio!
+}
+
+type Movimiento {
+    id: ID!
+    vehiculo: Vehiculo!
+    espacio: Espacio!
+    fechaEntrada: DateTime!
+    fechaSalida: DateTime
+    tiempoPermanenciaMinutos: Int
+    estado: EstadoMovimiento!
+}
+
+"Resultado individual dentro de un registro de vehículos en lote."
+type ResultadoLoteVehiculo {
+    exito: Boolean!
+    vehiculo: Vehiculo
+    error: ErrorNegocio
+}
+
+"Error de negocio con el mismo código estable que expone el contrato REST."
+type ErrorNegocio {
+    codigo: String!
+    mensaje: String!
+}
+
+type MarcasPorTipo {
+    tipo: TipoVehiculo!
+    marcas: [MarcaConModelos!]!
+}
+
+type MarcaConModelos {
+    marca: String!
+    modelos: [String!]!
+}
+
+input PropietarioInput {
+    primerNombre: String!
+    primerApellido: String!
+    numeroDocumento: String!
+    tipoUsuario: TipoUsuario!
+    telefono: String
+    correo: String
+}
+
+input VehiculoInput {
+    placa: String!
+    tipo: TipoVehiculo!
+    marca: String!
+    modelo: String
+    propietarioId: ID!
+}
+
+input EspacioInput {
+    numero: String!
+}
+
+enum TipoUsuario {
+    ESTUDIANTE
+    DOCENTE
+    ADMINISTRATIVO
+    VISITANTE
+}
+
+enum TipoVehiculo {
+    AUTOMOVIL
+    MOTOCICLETA
+    OTRO
+}
+
+enum EstadoVehiculo {
+    ACTIVO
+    INACTIVO
+}
+
+enum EstadoEspacio {
+    DISPONIBLE
+    OCUPADO
+    RESERVADO
+    FUERA_DE_SERVICIO
+}
+
+enum EstadoMovimiento {
+    INGRESADO
+    EN_PARQUEADERO
+    FINALIZADO
+}

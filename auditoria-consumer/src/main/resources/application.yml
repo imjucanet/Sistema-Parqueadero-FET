@@ -1,0 +1,48 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: auditoria-consumer
+  datasource:
+    url: jdbc:postgresql://localhost:5432/parqueadero
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    table: flyway_schema_history_auditoria
+    # Comparte el esquema "public" con el backend (y su propia tabla de
+    # historial de Flyway). Sin baseline, Flyway ve el esquema no vacío y se
+    # niega a continuar porque no reconoce esas tablas como propias.
+    # baseline-version: 0 asegura que la migración V1__auditoria_eventos.sql
+    # sí se ejecute (si quedara en 1, coincidiría con V1 y Flyway la saltaría).
+    baseline-on-migrate: true
+    baseline-version: 0
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: ${SPRING_KAFKA_CONSUMER_GROUP_ID:auditoria-group}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    listener:
+      concurrency: 3
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
+
+auditoria:
+  topico-movimientos: parqueadero.movimientos

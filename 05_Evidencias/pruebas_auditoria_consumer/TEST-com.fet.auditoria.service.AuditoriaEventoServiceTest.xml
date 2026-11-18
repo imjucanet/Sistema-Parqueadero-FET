@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.fet.auditoria.service.AuditoriaEventoServiceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-18T13:43:07.065Z" hostname="LOQ-15AHP10" time="0.357">
+  <properties/>
+  <testcase name="eventoYaExistente_seIgnoraSinError()" classname="com.fet.auditoria.service.AuditoriaEventoServiceTest" time="0.328"/>
+  <testcase name="carreraEntreInstancias_seTrataComoDuplicado()" classname="com.fet.auditoria.service.AuditoriaEventoServiceTest" time="0.009"/>
+  <testcase name="eventoNuevo_sePersiste()" classname="com.fet.auditoria.service.AuditoriaEventoServiceTest" time="0.018"/>
+  <system-out><![CDATA[2026-11-18T08:43:07.160-05:00  INFO 24140 --- [auditoria-consumer] [ad | producer-2] org.apache.kafka.clients.NetworkClient   : [Producer clientId=producer-2] Node 0 disconnected.
+2026-11-18T08:43:07.160-05:00  WARN 24140 --- [auditoria-consumer] [ad | producer-2] org.apache.kafka.clients.NetworkClient   : [Producer clientId=producer-2] Connection to node 0 (localhost/127.0.0.1:40154) could not be established. Node may not be available.
+2026-11-18T08:43:07.382-05:00  INFO 24140 --- [auditoria-consumer] [    Test worker] c.f.a.service.AuditoriaEventoService     : Evento duplicado ignorado: eventId=evt-dup eventType=VEHICULO_INGRESADO
+2026-11-18T08:43:07.404-05:00  INFO 24140 --- [auditoria-consumer] [    Test worker] c.f.a.service.AuditoriaEventoService     : Evento duplicado ignorado: eventId=evt-race eventType=VEHICULO_INGRESADO
+2026-11-18T08:43:07.406-05:00  INFO 24140 --- [auditoria-consumer] [    Test worker] c.f.a.service.AuditoriaEventoService     : Evento evt-1 (VEHICULO_INGRESADO) persistido en AUDITORIA_EVENTOS. movimientoId=100, placa=ABC123
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

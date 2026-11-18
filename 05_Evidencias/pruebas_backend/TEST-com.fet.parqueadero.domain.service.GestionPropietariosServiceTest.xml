@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.fet.parqueadero.domain.service.GestionPropietariosServiceTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-18T13:42:14.375Z" hostname="LOQ-15AHP10" time="0.078">
+  <properties/>
+  <testcase name="obtenerPropietario_cuandoNoExiste_lanzaRecursoNoEncontrado()" classname="com.fet.parqueadero.domain.service.GestionPropietariosServiceTest" time="0.063"/>
+  <testcase name="obtenerPropietario_cuandoExiste_devuelvePropietario()" classname="com.fet.parqueadero.domain.service.GestionPropietariosServiceTest" time="0.002"/>
+  <testcase name="actualizarPropietario_actualizaDatos()" classname="com.fet.parqueadero.domain.service.GestionPropietariosServiceTest" time="0.002"/>
+  <testcase name="registrarPropietario_guardaNuevoPropietario()" classname="com.fet.parqueadero.domain.service.GestionPropietariosServiceTest" time="0.002"/>
+  <testcase name="listarPropietarios_delegaAlRepositorio()" classname="com.fet.parqueadero.domain.service.GestionPropietariosServiceTest" time="0.001"/>
+  <testcase name="registrarPropietario_conDocumentoDuplicado_lanzaRecursoDuplicado()" classname="com.fet.parqueadero.domain.service.GestionPropietariosServiceTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

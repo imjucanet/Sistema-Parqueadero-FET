@@ -1,0 +1,47 @@
+ENTORNO DE EJECUCION DE LAS PRUEBAS
+Generado: 2026-11-18 08:48:05 -0500
+Equipo: LOQ-15AHP10
+==============================================================================
+
+--- Sistema operativo ---
+Windows 11 Pro  10.0.26300
+
+--- Java ---
+java version "21.0.12.1" 2026-08-18 LTS
+Java(TM) SE Runtime Environment (build 21.0.12.1+1-LTS-4)
+Java HotSpot(TM) 64-Bit Server VM (build 21.0.12.1+1-LTS-4, mixed mode, sharing)
+
+--- Gradle (wrapper del proyecto) ---
+distributionUrl=https\://services.gradle.org/distributions/gradle-8.14.2-bin.zip
+
+--- Node / npm ---
+node v24.15.0
+npm  11.12.1
+
+--- Docker ---
+Docker version 29.7.2, build a7dcaa6
+
+==============================================================================
+NOTA SOBRE LA RUTA DE EJECUCION
+==============================================================================
+Las pruebas de los modulos Java se ejecutaron sobre una copia del proyecto en una
+ruta sin caracteres acentuados:
+
+  C:\Users\jucanet\AppData\Local\Temp\pa_ev\
+
+Motivo: en Windows, cuando la ruta del proyecto contiene caracteres no ASCII (la
+"O" acentuada de "PROGRAMACION"), Gradle escribe el classpath del worker de
+pruebas en un argfile codificado en UTF-8, pero el lanzador de Java lo interpreta
+con la codepage ANSI del sistema. La ruta se corrompe, la entrada
+build/classes/java/test se cae del classpath y ninguna clase de prueba se
+encuentra (ClassNotFoundException en las 9 clases de prueba).
+
+No es un defecto del codigo fuente: la compilacion (./gradlew build) y la
+ejecucion (./gradlew bootRun) no se ven afectadas. Al clonar el repositorio en
+una ruta ASCII (por ejemplo D:\dev\parqueadero), ./gradlew test pasa sin cambios.
+
+Comandos ejecutados:
+  backend             > ./gradlew test   -> BUILD SUCCESSFUL in 5m 35s
+  auditoria-consumer  > ./gradlew test   -> BUILD SUCCESSFUL in 42s
+  frontend            > npm run lint     -> exit 0
+  frontend            > npm run build    -> exit 0

@@ -1,0 +1,125 @@
+RESUMEN CONSOLIDADO DE PRUEBAS AUTOMATIZADAS
+Sistema de Gestion de Parqueadero Institucional FET
+Generado a partir de los reportes JUnit XML de Gradle (carpeta 05_Evidencias).
+==============================================================================
+
+MODULO: backend (API REST + GraphQL + productor Kafka)
+------------------------------------------------------------------------------
+
+  Clase : com.fet.parqueadero.ParqueaderoApiIntegrationTest
+  Casos : 26   Fallos: 0   Errores: 0   Omitidos: 0   Tiempo: 1.566 s
+    [OK   ] actualizarPropietario_devuelve200()                                        0.028 s
+    [OK   ] dobleEntrada_devuelve409()                                                 0.026 s
+    [OK   ] entradaVehiculoInexistente_devuelve400()                                   0.066 s
+    [OK   ] entrada_conEspacioIdExplicito_ocupaEseEspacioEnVezDeAutoAsignar()          0.023 s
+    [OK   ] entrada_conEspacioIdInexistente_devuelve400()                              0.018 s
+    [OK   ] entrada_conEspacioIdYaOcupado_devuelve409()                                0.040 s
+    [OK   ] entrada_devuelve201_ocupaEspacio_y_primeraSalida_devuelve200()             0.116 s
+    [OK   ] historial_de_movimientos_incluye_el_movimiento()                           0.035 s
+    [OK   ] listarEspacios_seedInicial_disponiblesAlInicio()                           0.008 s
+    [OK   ] listarMarcas_devuelveCatalogoCompletoConModelosPorMarcaYTipo()             0.028 s
+    [OK   ] listarVehiculos_conPaginacion_devuelveMetadataDePaginaCorrecta()           0.091 s
+    [OK   ] obtenerPropietarioInexistente_devuelve404()                                0.471 s
+    [OK   ] paginacionConParametrosInvalidos_devuelve400()                             0.007 s
+    [OK   ] registrarEspacioConNumeroSoloEspacios_devuelve400()                        0.004 s
+    [OK   ] registrarEspacioConNumeroVacio_devuelve400()                               0.021 s
+    [OK   ] registrarEspacioDuplicado_devuelve409()                                    0.011 s
+    [OK   ] registrarEspacio_devuelve201Disponible()                                   0.006 s
+    [OK   ] registrarPropietarioDuplicado_devuelve409()                                0.017 s
+    [OK   ] registrarPropietarioInvalido_devuelve400Validacion()                       0.009 s
+    [OK   ] registrarPropietarioValido_devuelve201()                                   0.006 s
+    [OK   ] registrarVehiculoConPropietarioInexistente_devuelve400()                   0.084 s
+    [OK   ] registrarVehiculoDuplicado_devuelve409()                                   0.017 s
+    [OK   ] registrarVehiculoValido_devuelve201Activo()                                0.329 s
+    [OK   ] registrarVehiculosEnLote_mezclaExitosYErrores_devuelve207()                0.052 s
+    [OK   ] salidaDeMovimientoInexistente_devuelve404()                                0.006 s
+    [OK   ] salidaDeMovimientoNoActivo_devuelve409()                                   0.023 s
+
+  Clase : com.fet.parqueadero.ParqueaderoGraphQLIntegrationTest
+  Casos : 12   Fallos: 0   Errores: 0   Omitidos: 0   Tiempo: 302.479 s
+    [OK   ] entradaYSalida_actualizanEspacioYPermanencia()                           120.096 s
+    [OK   ] espacios_conPaginacion_limitaElResultado()                                 0.016 s
+    [OK   ] fechaEntrada_seSerializaComoDateTimeIso8601()                             60.070 s
+    [OK   ] marcas_devuelveElCatalogoAgrupadoPorTipo()                                 0.015 s
+    [OK   ] movimiento_porId_devuelveElMovimientoConSusRelaciones()                   60.423 s
+    [OK   ] registrarEspacio_conNumeroDuplicado_devuelveCodigoDeNegocio()              0.323 s
+    [OK   ] registrarEspacio_creaElEspacioComoDisponible()                             0.012 s
+    [OK   ] registrarPropietarioYVehiculo_consultaAnidadaDevuelveRelacion()            0.087 s
+    [OK   ] registrarPropietario_conDocumentoDemasiadoLargo_devuelveValidacion()       0.010 s
+    [OK   ] registrarVehiculo_conPlacaEnBlanco_devuelveValidacion()                    0.015 s
+    [OK   ] registrarVehiculosEnLote_informaExitoYErrorPorElemento()                   0.037 s
+    [OK   ] subscriptionMovimientoRegistrado_emiteLaEntradaTrasConfirmarse()          61.365 s
+
+  Clase : com.fet.parqueadero.domain.service.GestionEspaciosServiceTest
+  Casos : 4   Fallos: 0   Errores: 0   Omitidos: 0   Tiempo: 0.477 s
+    [OK   ] listarEspaciosDisponibles_delegaAlRepositorio()                            0.442 s
+    [OK   ] listarEspacios_delegaAlRepositorio()                                       0.004 s
+    [OK   ] registrarEspacio_conNumeroDuplicado_lanzaRecursoDuplicado()                0.011 s
+    [OK   ] registrarEspacio_guardaComoDisponible()                                    0.016 s
+
+  Clase : com.fet.parqueadero.domain.service.GestionMovimientosServiceTest
+  Casos : 12   Fallos: 0   Errores: 0   Omitidos: 0   Tiempo: 0.290 s
+    [OK   ] listarHistorialMovimientos_delegaAlRepositorio()                           0.002 s
+    [OK   ] listarMovimientosActivos_delegaAlRepositorio()                             0.003 s
+    [OK   ] registrarEntrada_conEspacioIdInexistente_lanzaEntidadInvalidaException()   0.005 s
+    [OK   ] registrarEntrada_conEspacioIdNoDisponible_lanzaEspacioNoDisponibleException()   0.005 s
+    [OK   ] registrarEntrada_conEspacioIdValido_usaEseEspacioEnVezDeAutoAsignar()      0.004 s
+    [OK   ] registrarEntrada_conVehiculoInexistente_lanzaEntidadInvalidaException()    0.005 s
+    [OK   ] registrarEntrada_conVehiculoYEspacioValidos_guardaMovimientoYPublicaEvento()   0.007 s
+    [OK   ] registrarEntrada_conVehiculoYaEnParqueadero_lanzaVehiculoYaEnParqueaderoException()   0.004 s
+    [OK   ] registrarEntrada_sinEspaciosDisponibles_lanzaEspacioNoDisponibleException()   0.004 s
+    [OK   ] registrarSalida_conMovimientoActivo_finalizaYPublicaEvento()               0.236 s
+    [OK   ] registrarSalida_conMovimientoInexistente_lanzaRecursoNoEncontrado()        0.003 s
+    [OK   ] registrarSalida_conMovimientoNoActivo_lanzaMovimientoNoActivoException()   0.003 s
+
+  Clase : com.fet.parqueadero.domain.service.GestionPropietariosServiceTest
+  Casos : 6   Fallos: 0   Errores: 0   Omitidos: 0   Tiempo: 0.078 s
+    [OK   ] actualizarPropietario_actualizaDatos()                                     0.002 s
+    [OK   ] listarPropietarios_delegaAlRepositorio()                                   0.001 s
+    [OK   ] obtenerPropietario_cuandoExiste_devuelvePropietario()                      0.002 s
+    [OK   ] obtenerPropietario_cuandoNoExiste_lanzaRecursoNoEncontrado()               0.063 s
+    [OK   ] registrarPropietario_conDocumentoDuplicado_lanzaRecursoDuplicado()         0.003 s
+    [OK   ] registrarPropietario_guardaNuevoPropietario()                              0.002 s
+
+  Clase : com.fet.parqueadero.domain.service.GestionVehiculosServiceTest
+  Casos : 8   Fallos: 0   Errores: 0   Omitidos: 0   Tiempo: 0.030 s
+    [OK   ] actualizarVehiculo_conservaEstadoYGuardaCambios()                          0.003 s
+    [OK   ] listarMarcas_devuelveCatalogoCompletoConModelosPorMarcaYTipo()             0.005 s
+    [OK   ] listarVehiculos_delegaAlRepositorio()                                      0.002 s
+    [OK   ] obtenerVehiculo_cuandoExiste_devuelveVehiculo()                            0.002 s
+    [OK   ] obtenerVehiculo_cuandoNoExiste_lanzaRecursoNoEncontrado()                  0.004 s
+    [OK   ] registrarVehiculo_conPlacaDuplicada_lanzaRecursoDuplicado()                0.003 s
+    [OK   ] registrarVehiculo_conPropietarioInvalido_lanzaEntidadInvalidaException()   0.002 s
+    [OK   ] registrarVehiculo_conPropietarioValido_guardaVehiculo()                    0.006 s
+
+  ..........................................................................
+  SUBTOTAL pruebas_backend: 68 casos | 0 fallos | 0 errores | 0 omitidos | 304.920 s
+
+MODULO: auditoria-consumer (consumidor Kafka)
+------------------------------------------------------------------------------
+
+  Clase : com.fet.auditoria.integration.AuditoriaConsumerIntegrationTest
+  Casos : 2   Fallos: 0   Errores: 0   Omitidos: 0   Tiempo: 3.888 s
+    [OK   ] eventoMalformado_vaAlDeadLetterYNoBloqueaLosSiguientes()                   0.669 s
+    [OK   ] eventoValido_sePersisteYReenviarloNoLoDuplica()                            3.217 s
+
+  Clase : com.fet.auditoria.listener.MovimientoEventoListenerTest
+  Casos : 4   Fallos: 0   Errores: 0   Omitidos: 0   Tiempo: 0.352 s
+    [OK   ] campoObligatorioAusente_lanzaEventoInvalido()                              0.005 s
+    [OK   ] eventTypeDesconocido_lanzaEventoInvalido()                                 0.016 s
+    [OK   ] eventoValido_seDelegaAlServicio()                                          0.115 s
+    [OK   ] jsonMalformado_lanzaEventoInvalido()                                       0.206 s
+
+  Clase : com.fet.auditoria.service.AuditoriaEventoServiceTest
+  Casos : 3   Fallos: 0   Errores: 0   Omitidos: 0   Tiempo: 0.357 s
+    [OK   ] carreraEntreInstancias_seTrataComoDuplicado()                              0.009 s
+    [OK   ] eventoNuevo_sePersiste()                                                   0.018 s
+    [OK   ] eventoYaExistente_seIgnoraSinError()                                       0.328 s
+
+  ..........................................................................
+  SUBTOTAL pruebas_auditoria_consumer: 9 casos | 0 fallos | 0 errores | 0 omitidos | 4.597 s
+
+==============================================================================
+TOTAL GENERAL: 77 casos ejecutados | 0 fallos | 0 errores | 0 omitidos
+RESULTADO: TODAS LAS PRUEBAS PASARON
+==============================================================================

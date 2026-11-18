@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.fet.parqueadero.ParqueaderoApiIntegrationTest" tests="26" skipped="0" failures="0" errors="0" timestamp="2026-11-18T13:37:08.027Z" hostname="LOQ-15AHP10" time="1.566">
+  <properties/>
+  <testcase name="obtenerPropietarioInexistente_devuelve404()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.471"/>
+  <testcase name="listarMarcas_devuelveCatalogoCompletoConModelosPorMarcaYTipo()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.028"/>
+  <testcase name="entradaVehiculoInexistente_devuelve400()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.066"/>
+  <testcase name="registrarVehiculoValido_devuelve201Activo()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.329"/>
+  <testcase name="entrada_devuelve201_ocupaEspacio_y_primeraSalida_devuelve200()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.116"/>
+  <testcase name="registrarPropietarioDuplicado_devuelve409()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.017"/>
+  <testcase name="actualizarPropietario_devuelve200()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.028"/>
+  <testcase name="historial_de_movimientos_incluye_el_movimiento()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.035"/>
+  <testcase name="registrarEspacioConNumeroVacio_devuelve400()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.021"/>
+  <testcase name="entrada_conEspacioIdYaOcupado_devuelve409()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.04"/>
+  <testcase name="registrarEspacioDuplicado_devuelve409()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.011"/>
+  <testcase name="salidaDeMovimientoNoActivo_devuelve409()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.023"/>
+  <testcase name="paginacionConParametrosInvalidos_devuelve400()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.007"/>
+  <testcase name="listarVehiculos_conPaginacion_devuelveMetadataDePaginaCorrecta()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.091"/>
+  <testcase name="dobleEntrada_devuelve409()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.026"/>
+  <testcase name="registrarVehiculoDuplicado_devuelve409()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.017"/>
+  <testcase name="listarEspacios_seedInicial_disponiblesAlInicio()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.008"/>
+  <testcase name="registrarPropietarioInvalido_devuelve400Validacion()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.009"/>
+  <testcase name="registrarVehiculoConPropietarioInexistente_devuelve400()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.084"/>
+  <testcase name="entrada_conEspacioIdExplicito_ocupaEseEspacioEnVezDeAutoAsignar()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.023"/>
+  <testcase name="registrarEspacio_devuelve201Disponible()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.006"/>
+  <testcase name="registrarPropietarioValido_devuelve201()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.006"/>
+  <testcase name="registrarVehiculosEnLote_mezclaExitosYErrores_devuelve207()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.052"/>
+  <testcase name="salidaDeMovimientoInexistente_devuelve404()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.006"/>
+  <testcase name="entrada_conEspacioIdInexistente_devuelve400()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.018"/>
+  <testcase name="registrarEspacioConNumeroSoloEspacios_devuelve400()" classname="com.fet.parqueadero.ParqueaderoApiIntegrationTest" time="0.004"/>
+  <system-out><![CDATA[08:37:00.768 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.fet.parqueadero.ParqueaderoApiIntegrationTest]: ParqueaderoApiIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+08:37:00.928 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.fet.parqueadero.ParqueaderoBackendApplication for test class com.fet.parqueadero.ParqueaderoApiIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-11-18T08:37:01.449-05:00  INFO 4808 --- [backend] [    Test worker] c.f.p.ParqueaderoApiIntegrationTest      : Starting ParqueaderoApiIntegrationTest using Java 21.0.12.1 with PID 4808 (started by jucanet in C:\Users\jucanet\AppData\Local\Temp\pa_ev\backend)
+2026-11-18T08:37:01.450-05:00  INFO 4808 --- [backend] [    Test worker] c.f.p.ParqueaderoApiIntegrationTest      : The following 1 profile is active: "test"
+2026-11-18T08:37:02.427-05:00  INFO 4808 --- [backend] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-18T08:37:02.638-05:00  INFO 4808 --- [backend] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 198 ms. Found 4 JPA repository interfaces.
+2026-11-18T08:37:03.418-05:00  INFO 4808 --- [backend] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-18T08:37:03.559-05:00  INFO 4808 --- [backend] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.53.Final
+2026-11-18T08:37:03.625-05:00  INFO 4808 --- [backend] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-11-18T08:37:04.060-05:00  INFO 4808 --- [backend] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-18T08:37:04.102-05:00  INFO 4808 --- [backend] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-18T08:37:04.330-05:00  INFO 4808 --- [backend] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:parqueadero user=SA
+2026-11-18T08:37:04.333-05:00  INFO 4808 --- [backend] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-18T08:37:04.396-05:00  INFO 4808 --- [backend] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-18T08:37:05.370-05:00  INFO 4808 --- [backend] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-18T08:37:05.426-05:00  INFO 4808 --- [backend] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-18T08:37:07.017-05:00  INFO 4808 --- [backend] [    Test worker] efaultSchemaResourceGraphQlSourceBuilder : Loaded 1 resource(s) in the GraphQL schema.
+2026-11-18T08:37:07.291-05:00  INFO 4808 --- [backend] [    Test worker] o.s.b.a.g.GraphQlAutoConfiguration       : GraphQL schema inspection:
+	Unmapped fields: {}
+	Unmapped registrations: {}
+	Unmapped arguments: {}
+	Skipped types: []
+2026-11-18T08:37:07.326-05:00  INFO 4808 --- [backend] [    Test worker] s.b.a.g.s.GraphQlWebMvcAutoConfiguration : GraphQL endpoint HTTP POST /graphql
+2026-11-18T08:37:07.591-05:00  INFO 4808 --- [backend] [    Test worker] s.b.a.g.s.GraphQlWebMvcAutoConfiguration : GraphQL endpoint WebSocket /graphql
+2026-11-18T08:37:07.730-05:00  INFO 4808 --- [backend] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-11-18T08:37:07.730-05:00  INFO 4808 --- [backend] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-18T08:37:07.731-05:00  INFO 4808 --- [backend] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-11-18T08:37:07.855-05:00  INFO 4808 --- [backend] [    Test worker] c.f.p.ParqueaderoApiIntegrationTest      : Started ParqueaderoApiIntegrationTest in 6.756 seconds (process running for 7.987)
+2026-11-18T08:37:08.017-05:00  WARN 4808 --- [backend] [    Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-11-18T08:37:08.017-05:00  WARN 4808 --- [backend] [    Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+]]></system-out>
+  <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\jucanet\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.17.8\f09415827a71be7ed621c7bd02550678f28bc81c\byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>

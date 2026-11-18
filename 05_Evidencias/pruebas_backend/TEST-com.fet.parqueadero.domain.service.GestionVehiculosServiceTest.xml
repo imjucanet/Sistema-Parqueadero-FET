@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.fet.parqueadero.domain.service.GestionVehiculosServiceTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-18T13:42:14.454Z" hostname="LOQ-15AHP10" time="0.03">
+  <properties/>
+  <testcase name="listarMarcas_devuelveCatalogoCompletoConModelosPorMarcaYTipo()" classname="com.fet.parqueadero.domain.service.GestionVehiculosServiceTest" time="0.005"/>
+  <testcase name="registrarVehiculo_conPropietarioValido_guardaVehiculo()" classname="com.fet.parqueadero.domain.service.GestionVehiculosServiceTest" time="0.006"/>
+  <testcase name="obtenerVehiculo_cuandoNoExiste_lanzaRecursoNoEncontrado()" classname="com.fet.parqueadero.domain.service.GestionVehiculosServiceTest" time="0.004"/>
+  <testcase name="actualizarVehiculo_conservaEstadoYGuardaCambios()" classname="com.fet.parqueadero.domain.service.GestionVehiculosServiceTest" time="0.003"/>
+  <testcase name="registrarVehiculo_conPlacaDuplicada_lanzaRecursoDuplicado()" classname="com.fet.parqueadero.domain.service.GestionVehiculosServiceTest" time="0.003"/>
+  <testcase name="obtenerVehiculo_cuandoExiste_devuelveVehiculo()" classname="com.fet.parqueadero.domain.service.GestionVehiculosServiceTest" time="0.002"/>
+  <testcase name="registrarVehiculo_conPropietarioInvalido_lanzaEntidadInvalidaException()" classname="com.fet.parqueadero.domain.service.GestionVehiculosServiceTest" time="0.002"/>
+  <testcase name="listarVehiculos_delegaAlRepositorio()" classname="com.fet.parqueadero.domain.service.GestionVehiculosServiceTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

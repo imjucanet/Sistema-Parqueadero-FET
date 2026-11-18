@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.fet.parqueadero.domain.service.GestionEspaciosServiceTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-18T13:42:13.601Z" hostname="LOQ-15AHP10" time="0.477">
+  <properties/>
+  <testcase name="listarEspaciosDisponibles_delegaAlRepositorio()" classname="com.fet.parqueadero.domain.service.GestionEspaciosServiceTest" time="0.442"/>
+  <testcase name="registrarEspacio_conNumeroDuplicado_lanzaRecursoDuplicado()" classname="com.fet.parqueadero.domain.service.GestionEspaciosServiceTest" time="0.011"/>
+  <testcase name="listarEspacios_delegaAlRepositorio()" classname="com.fet.parqueadero.domain.service.GestionEspaciosServiceTest" time="0.004"/>
+  <testcase name="registrarEspacio_guardaComoDisponible()" classname="com.fet.parqueadero.domain.service.GestionEspaciosServiceTest" time="0.016"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

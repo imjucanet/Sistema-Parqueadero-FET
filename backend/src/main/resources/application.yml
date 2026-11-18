@@ -1,0 +1,52 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: backend
+  datasource:
+    url: jdbc:postgresql://localhost:5433/parqueadero
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    table: flyway_schema_history_backend
+    # Comparte el esquema "public" con auditoria-consumer (y su propia tabla de
+    # historial de Flyway). Sin baseline, Flyway ve el esquema no vacío (por las
+    # tablas de auditoria-consumer) y se niega a continuar porque no las reconoce
+    # como propias. baseline-version: 0 asegura que V1__esquema_inicial.sql sí se
+    # ejecute (si quedara en 1, coincidiría con V1 y Flyway la saltaría).
+    baseline-on-migrate: true
+    baseline-version: 0
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+  graphql:
+    graphiql:
+      enabled: true
+    websocket:
+      path: /graphql
+    # El handshake del WebSocket de las subscriptions no pasa por el
+    # WebMvcConfigurer de CorsConfig (no es una peticion MVC), asi que su CORS
+    # se declara aqui. Cubre tambien /graphql por HTTP.
+    cors:
+      allowed-origin-patterns: "http://localhost:*"
+      allowed-methods: GET,POST,OPTIONS
+      allowed-headers: "*"
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+parqueadero:
+  espacios-iniciales: 20

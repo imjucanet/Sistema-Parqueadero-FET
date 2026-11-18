@@ -1,0 +1,24 @@
+{
+  "VEHICULO_INGRESADO": {
+    "eventId": "550e8400-e29b-41d4-a716-446655440000",
+    "eventType": "VEHICULO_INGRESADO",
+    "timestamp": "2026-08-24T08:30:00-05:00",
+    "movimientoId": 100,
+    "vehiculoId": 25,
+    "placa": "ABC123",
+    "espacioId": 8,
+    "espacioNumero": "E-08",
+    "tiempoPermanenciaMinutos": null
+  },
+  "VEHICULO_SALIDO": {
+    "eventId": "660e8400-e29b-41d4-a716-446655440001",
+    "eventType": "VEHICULO_SALIDO",
+    "timestamp": "2026-08-24T11:30:00-05:00",
+    "movimientoId": 100,
+    "vehiculoId": 25,
+    "placa": "ABC123",
+    "espacioId": 8,
+    "espacioNumero": "E-08",
+    "tiempoPermanenciaMinutos": 180
+  }
+}

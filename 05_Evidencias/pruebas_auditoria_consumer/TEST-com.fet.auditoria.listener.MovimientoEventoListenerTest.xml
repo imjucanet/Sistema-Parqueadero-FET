@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.fet.auditoria.listener.MovimientoEventoListenerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-18T13:43:06.706Z" hostname="LOQ-15AHP10" time="0.352">
+  <properties/>
+  <testcase name="jsonMalformado_lanzaEventoInvalido()" classname="com.fet.auditoria.listener.MovimientoEventoListenerTest" time="0.206"/>
+  <testcase name="eventTypeDesconocido_lanzaEventoInvalido()" classname="com.fet.auditoria.listener.MovimientoEventoListenerTest" time="0.016"/>
+  <testcase name="eventoValido_seDelegaAlServicio()" classname="com.fet.auditoria.listener.MovimientoEventoListenerTest" time="0.115"/>
+  <testcase name="campoObligatorioAusente_lanzaEventoInvalido()" classname="com.fet.auditoria.listener.MovimientoEventoListenerTest" time="0.005"/>
+  <system-out><![CDATA[2026-11-18T08:43:06.752-05:00  INFO 24140 --- [auditoria-consumer] [ SessionTracker] o.a.zookeeper.server.SessionTrackerImpl  : SessionTrackerImpl exited loop!
+2026-11-18T08:43:06.754-05:00  INFO 24140 --- [auditoria-consumer] [ad | producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=producer-1] Node 0 disconnected.
+2026-11-18T08:43:06.754-05:00  WARN 24140 --- [auditoria-consumer] [ad | producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=producer-1] Connection to node 0 (localhost/127.0.0.1:40154) could not be established. Node may not be available.
+2026-11-18T08:43:06.801-05:00  INFO 24140 --- [auditoria-consumer] [ad | producer-2] org.apache.kafka.clients.NetworkClient   : [Producer clientId=producer-2] Node 0 disconnected.
+2026-11-18T08:43:06.801-05:00  WARN 24140 --- [auditoria-consumer] [ad | producer-2] org.apache.kafka.clients.NetworkClient   : [Producer clientId=producer-2] Connection to node 0 (localhost/127.0.0.1:40154) could not be established. Node may not be available.
+2026-11-18T08:43:07.032-05:00  INFO 24140 --- [auditoria-consumer] [ad | producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=producer-1] Node 0 disconnected.
+2026-11-18T08:43:07.033-05:00  WARN 24140 --- [auditoria-consumer] [ad | producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=producer-1] Connection to node 0 (localhost/127.0.0.1:40154) could not be established. Node may not be available.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

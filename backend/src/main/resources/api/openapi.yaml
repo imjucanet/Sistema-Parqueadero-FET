@@ -1,0 +1,690 @@
+openapi: 3.0.3
+info:
+  title: API REST - Sistema de Gestión de Parqueadero Institucional FET
+  version: 1.0.0
+  description: |
+    Contrato inicial de la API REST del backend Spring Boot.
+    PostgreSQL es la fuente de verdad operacional. Kafka se utiliza
+    para publicar eventos de entrada y salida después de persistir
+    correctamente la operación.
+servers:
+  - url: http://localhost:8080
+    description: Backend local
+
+tags:
+  - name: Propietarios
+  - name: Vehiculos
+  - name: Espacios
+  - name: Movimientos
+
+paths:
+  /api/propietarios:
+    post:
+      tags: [Propietarios]
+      summary: Registrar propietario
+      operationId: registrarPropietario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropietarioRequest'
+      responses:
+        '201':
+          description: Propietario creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Propietario'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    get:
+      tags: [Propietarios]
+      summary: Consultar propietarios
+      operationId: listarPropietarios
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Página de propietarios
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropietarioPage'
+
+  /api/propietarios/{id}:
+    get:
+      tags: [Propietarios]
+      summary: Consultar propietario por ID
+      operationId: obtenerPropietario
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Propietario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Propietario'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags: [Propietarios]
+      summary: Actualizar propietario
+      operationId: actualizarPropietario
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropietarioRequest'
+      responses:
+        '200':
+          description: Propietario actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Propietario'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/vehiculos:
+    post:
+      tags: [Vehiculos]
+      summary: Registrar vehículo
+      operationId: registrarVehiculo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehiculoRequest'
+      responses:
+        '201':
+          description: Vehículo creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehiculo'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    get:
+      tags: [Vehiculos]
+      summary: Consultar vehículos
+      operationId: listarVehiculos
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Página de vehículos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehiculoPage'
+
+  /api/vehiculos/lote:
+    post:
+      tags: [Vehiculos]
+      summary: Registrar varios vehículos en una sola petición
+      operationId: registrarVehiculosEnLote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehiculoLoteRequest'
+      responses:
+        '207':
+          description: Resultado del registro en lote; cada elemento indica si su vehículo se creó o el error puntual que ocurrió.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehiculoLoteResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/vehiculos/marcas:
+    get:
+      tags: [Vehiculos]
+      summary: Consultar catálogo completo de marcas y modelos, agrupado por tipo y marca
+      operationId: listarMarcas
+      description: |
+        Devuelve el catálogo estático completo de marcas y modelos más comunes
+        en Colombia, agrupado por tipo de vehículo (AUTOMOVIL, MOTOCICLETA,
+        OTRO) y luego por marca, pensado para alimentar dropdowns encadenados
+        en el frontend (tipo -> marca -> modelo), que el cliente filtra
+        localmente (con una opción "Otra" cuando la marca o el modelo buscado
+        no está en la lista; los campos `marca`/`modelo` del vehículo siguen
+        siendo texto libre). El objeto de `OTRO` es intencionalmente vacío.
+      responses:
+        '200':
+          description: Catálogo de marcas y modelos por tipo de vehículo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogoMarcas'
+
+  /api/vehiculos/{id}:
+    get:
+      tags: [Vehiculos]
+      summary: Consultar vehículo por ID
+      operationId: obtenerVehiculo
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Vehículo encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehiculo'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags: [Vehiculos]
+      summary: Actualizar vehículo
+      operationId: actualizarVehiculo
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehiculoRequest'
+      responses:
+        '200':
+          description: Vehículo actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehiculo'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/espacios:
+    post:
+      tags: [Espacios]
+      summary: Registrar espacio
+      operationId: registrarEspacio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EspacioRequest'
+      responses:
+        '201':
+          description: Espacio creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Espacio'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          description: Ya existe un espacio registrado con ese número.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      tags: [Espacios]
+      summary: Consultar todos los espacios
+      operationId: listarEspacios
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Página de espacios
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EspacioPage'
+
+  /api/espacios/disponibles:
+    get:
+      tags: [Espacios]
+      summary: Consultar espacios disponibles
+      operationId: listarEspaciosDisponibles
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Página de espacios disponibles
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EspacioPage'
+
+  /api/movimientos/entrada:
+    post:
+      tags: [Movimientos]
+      summary: Registrar entrada de vehículo
+      operationId: registrarEntrada
+      description: |
+        Valida el vehículo y registra el movimiento. Si se indica `espacioId`,
+        valida que ese espacio exista y esté DISPONIBLE y lo ocupa (refleja que
+        el conductor ya parqueó donde encontró sitio libre); si se omite, se
+        asigna automáticamente el primer espacio disponible. Luego actualiza el
+        espacio y publica VEHICULO_INGRESADO en Kafka.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntradaRequest'
+      responses:
+        '201':
+          description: Entrada registrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movimiento'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          description: No hay espacio disponible o el vehículo ya está dentro.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/movimientos/{id}/salida:
+    post:
+      tags: [Movimientos]
+      summary: Registrar salida de vehículo
+      operationId: registrarSalida
+      description: |
+        Registra la salida, calcula la permanencia, libera el espacio y
+        posteriormente publica VEHICULO_SALIDO en Kafka.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Salida registrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movimiento'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: El movimiento no está activo.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/movimientos/activos:
+    get:
+      tags: [Movimientos]
+      summary: Consultar vehículos actualmente dentro
+      operationId: listarMovimientosActivos
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Página de movimientos activos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovimientoPage'
+
+  /api/movimientos/historial:
+    get:
+      tags: [Movimientos]
+      summary: Consultar historial de entradas y salidas
+      operationId: listarHistorialMovimientos
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Página del historial de movimientos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovimientoPage'
+
+components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Número de página (0-indexado)
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    Size:
+      name: size
+      in: query
+      required: false
+      description: Cantidad de registros por página
+      schema:
+        type: integer
+        default: 20
+        minimum: 1
+    Id:
+      name: id
+      in: path
+      required: true
+      description: Identificador UUID del recurso
+      schema:
+        type: string
+        format: uuid
+
+  responses:
+    BadRequest:
+      description: Solicitud inválida
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Recurso no encontrado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    PropietarioRequest:
+      type: object
+      required: [primerNombre, primerApellido, numeroDocumento, tipoUsuario]
+      properties:
+        primerNombre:
+          type: string
+          minLength: 1
+          maxLength: 80
+          example: Juan
+        primerApellido:
+          type: string
+          minLength: 1
+          maxLength: 80
+          example: Pérez
+        numeroDocumento:
+          type: string
+          description: Número de documento de identidad (cédula/carné). Único por propietario.
+          minLength: 1
+          maxLength: 30
+          example: "1004567890"
+        tipoUsuario:
+          type: string
+          enum: [ESTUDIANTE, DOCENTE, ADMINISTRATIVO, VISITANTE]
+        telefono:
+          type: string
+          maxLength: 30
+          example: "3001234567"
+        correo:
+          type: string
+          format: email
+          maxLength: 120
+          example: usuario@fet.edu.co
+
+    Propietario:
+      allOf:
+        - $ref: '#/components/schemas/PropietarioRequest'
+        - type: object
+          required: [id, nombreCompleto]
+          properties:
+            id:
+              type: string
+              format: uuid
+            nombreCompleto:
+              type: string
+              description: Concatenación de primerNombre y primerApellido, calculada por el backend.
+              example: Juan Pérez
+
+    VehiculoRequest:
+      type: object
+      required: [placa, tipo, marca, propietarioId]
+      properties:
+        placa:
+          type: string
+          minLength: 1
+          maxLength: 20
+          example: ABC123
+        tipo:
+          type: string
+          enum: [AUTOMOVIL, MOTOCICLETA, OTRO]
+        marca:
+          type: string
+          minLength: 1
+          maxLength: 80
+          example: Toyota
+        modelo:
+          type: string
+          maxLength: 80
+          example: Corolla
+        propietarioId:
+          type: string
+          format: uuid
+
+    VehiculoLoteRequest:
+      type: object
+      required: [vehiculos]
+      properties:
+        vehiculos:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/VehiculoRequest'
+
+    VehiculoLoteResultado:
+      type: object
+      required: [exito]
+      properties:
+        exito:
+          type: boolean
+        vehiculo:
+          $ref: '#/components/schemas/Vehiculo'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+
+    VehiculoLoteResponse:
+      type: object
+      required: [resultados]
+      properties:
+        resultados:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehiculoLoteResultado'
+
+    Vehiculo:
+      allOf:
+        - $ref: '#/components/schemas/VehiculoRequest'
+        - type: object
+          required: [id, estado]
+          properties:
+            id:
+              type: string
+              format: uuid
+            estado:
+              type: string
+              enum: [ACTIVO, INACTIVO]
+
+    CatalogoMarcas:
+      type: object
+      description: |
+        Catálogo de marcas y modelos por tipo de vehículo (claves AUTOMOVIL,
+        MOTOCICLETA, OTRO); cada tipo mapea marca -> lista de modelos.
+      additionalProperties:
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            type: string
+      example:
+        AUTOMOVIL:
+          Toyota: [Corolla, Hilux, RAV4]
+          Chevrolet: [Spark, Onix]
+        MOTOCICLETA:
+          Yamaha: [FZ, MT-03]
+          AKT: [NKD 125, TTR]
+        OTRO: {}
+
+    EspacioRequest:
+      type: object
+      required: [numero]
+      properties:
+        numero:
+          type: string
+          minLength: 1
+          maxLength: 10
+          example: E-21
+
+    Espacio:
+      type: object
+      required: [id, numero, estado]
+      properties:
+        id:
+          type: string
+          format: uuid
+        numero:
+          type: string
+          example: E-01
+        estado:
+          type: string
+          enum: [DISPONIBLE, OCUPADO, RESERVADO, FUERA_DE_SERVICIO]
+
+    EntradaRequest:
+      type: object
+      required: [vehiculoId]
+      properties:
+        vehiculoId:
+          type: string
+          format: uuid
+        espacioId:
+          type: string
+          format: uuid
+          description: |
+            Espacio que el vehículo ya ocupó. Opcional: si se omite, se asigna
+            automáticamente el primer espacio disponible.
+
+    Movimiento:
+      type: object
+      required: [id, vehiculoId, espacioId, fechaEntrada, estado]
+      properties:
+        id:
+          type: string
+          format: uuid
+        vehiculoId:
+          type: string
+          format: uuid
+        espacioId:
+          type: string
+          format: uuid
+        fechaEntrada:
+          type: string
+          format: date-time
+        fechaSalida:
+          type: string
+          format: date-time
+          nullable: true
+        tiempoPermanenciaMinutos:
+          type: integer
+          format: int64
+          nullable: true
+        estado:
+          type: string
+          enum: [INGRESADO, EN_PARQUEADERO, FINALIZADO]
+
+    ErrorResponse:
+      type: object
+      required: [codigo, mensaje]
+      properties:
+        codigo:
+          type: string
+          example: ESPACIO_NO_DISPONIBLE
+        mensaje:
+          type: string
+          example: No hay espacios disponibles.
+
+    PaginaMetadata:
+      type: object
+      required: [page, size, totalElements, totalPages, first, last, hasNext, hasPrevious]
+      properties:
+        page:
+          type: integer
+          description: Número de página actual (0-indexada)
+          example: 0
+        size:
+          type: integer
+          description: Cantidad de elementos solicitados por página
+          example: 20
+        totalElements:
+          type: integer
+          format: int64
+          description: Total de elementos que cumplen el criterio de búsqueda
+          example: 45
+        totalPages:
+          type: integer
+          description: Total de páginas disponibles
+          example: 3
+        first:
+          type: boolean
+          description: Indica si la página actual es la primera
+        last:
+          type: boolean
+          description: Indica si la página actual es la última
+        hasNext:
+          type: boolean
+          description: Indica si existe una página siguiente
+        hasPrevious:
+          type: boolean
+          description: Indica si existe una página anterior
+
+    PropietarioPage:
+      allOf:
+        - $ref: '#/components/schemas/PaginaMetadata'
+        - type: object
+          required: [content]
+          properties:
+            content:
+              type: array
+              items:
+                $ref: '#/components/schemas/Propietario'
+
+    VehiculoPage:
+      allOf:
+        - $ref: '#/components/schemas/PaginaMetadata'
+        - type: object
+          required: [content]
+          properties:
+            content:
+              type: array
+              items:
+                $ref: '#/components/schemas/Vehiculo'
+
+    EspacioPage:
+      allOf:
+        - $ref: '#/components/schemas/PaginaMetadata'
+        - type: object
+          required: [content]
+          properties:
+            content:
+              type: array
+              items:
+                $ref: '#/components/schemas/Espacio'
+
+    MovimientoPage:
+      allOf:
+        - $ref: '#/components/schemas/PaginaMetadata'
+        - type: object
+          required: [content]
+          properties:
+            content:
+              type: array
+              items:
+                $ref: '#/components/schemas/Movimiento'
+
