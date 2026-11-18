@@ -57,7 +57,8 @@ negocio vive en los adaptadores.
 | `frontend/` | Cliente React + Vite que consume ambas APIs ([README](frontend/README.md)) |
 
 El informe final del proyecto es
-`Informe_Final_Sistema_Parqueadero_FET.docx` (raíz del repositorio).
+[`Informe_Final_Sistema_Parqueadero_FET.pdf`](Informe_Final_Sistema_Parqueadero_FET.pdf)
+(raíz del repositorio).
 
 ## Tecnologías
 
